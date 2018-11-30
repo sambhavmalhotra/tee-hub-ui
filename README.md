@@ -4,23 +4,13 @@ This project is a AngularJS web application. It is only for demo and analysis pu
 
 This application displays a list of variety of t-shirts with few options and filters.
 
-This application requires a Java backend to run.
-Get its Java application from here:
-```
-https://github.com/sambhavmalhotra/scribbleup-java-app.git
-```
-
 ## Getting Started
 
 To get you started you can simply clone the repository and install the dependencies.
 
 ### Prerequisites
 
-You need git to clone the 'scribbleUpApp' repository.
-You can get it from here:
-```
-https://github.com/sambhavmalhotra/scribbleUpApp.git
-```
+You need git to clone this repository.
 
 Also, you need to have node installed in you local system.
 You can get it from here:
@@ -28,12 +18,12 @@ You can get it from here:
 https://nodejs.org/en/download/
 ```
 
-### Clone `scribbleUpApp`
+### Clone `tee-hub-ui`
 
-Clone the `scribbleUpApp` repository using git:
+Clone the `tee-hub-ui` repository using git:
 
 ```
-git clone https://github.com/sambhavmalhotra/scribbleUpApp.git
+git clone https://github.com/sambhavmalhotra/tee-hub-ui.git
 
 ```
 
