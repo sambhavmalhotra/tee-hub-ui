@@ -9,7 +9,7 @@ angular
             $scope.showPosts = true;
             $scope.isCartOpen = false;
             $scope.totalPrice = 0;
-            vm.orderByForData = "price";
+            vm.orderByForData = "name";
             vm.sizesToShow = [];
             vm.tShirtsData = [];
             vm.tShirtsDataToShow = [];
@@ -132,21 +132,22 @@ angular
                 alert("Congratulation! You just finished the last step of this sample app.")
             };
 
-            function getTshirtsData() {
+            function getTShirtsData() {
                 openShowLoader();
                 loadSizesToShow(vm.sizeList);
                 homeServiceService.getData().then(function (response) {
                     angular.forEach(response.data, function(row) {
                         row["imageUrl"] = "data:image/jpg;base64," + row.image;
+                        row["isAddedToCart"] = false;
                     });
                     vm.tShirtsData = angular.copy(response.data);
                     filterDataToShow(vm.sizeList);
                     closeShowLoader();
                 }, function (error) {
-
+                    closeShowLoader();
                 });
             }
 
-            getTshirtsData();
+            getTShirtsData();
         }
     ]);
