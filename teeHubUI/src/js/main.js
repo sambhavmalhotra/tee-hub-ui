@@ -13,7 +13,7 @@ define([
         "bootstrap/dist/js/bootstrap.min.js",
         'angular-promise-tracker',
         './components/home.js',
-        '../api/mockApi.js',
+        './service/homeService.js',
         '../css/app.css'
     ], function(
         jquery,
@@ -27,7 +27,7 @@ define([
             'ui.bootstrap',
             'ajoslin.promise-tracker',
             'homeModule',
-            'mockApiModule'
+            'homeServiceModule'
             ])
             .config([
                 '$routeProvider',

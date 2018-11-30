@@ -38,11 +38,18 @@ npm install
 
 ### Run the Application
 
-The app is preconfigured with a simple development web server. The simplest way to start
-this server is:
+The app is preconfigured with a simple development web server. There are two steps to start the server:
+
+The first step is to start the AngularJS UI application by using the command:
 
 ```
 npm start
 ```
 
-Now browse to the app at [`localhost:8080`][local-app-url].
+The second step is to start the Node Server application by using the command:
+
+```
+node server.js
+```
+
+Now browse to the app at [`localhost:8080`][local-app-url]. The Node server will start on port 8000.

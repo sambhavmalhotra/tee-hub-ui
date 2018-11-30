@@ -1,8 +1,8 @@
 angular
     .module('homeModule', [])
     .controller('homeController', [
-        '$scope', '$location', '$timeout', 'mockApiService', '$filter',
-        function ($scope, $location, $timeout, mockApiService, $filter) {
+        '$scope', 'homeServiceService',
+        function ($scope, homeServiceService) {
             var vm = this;
             $scope.openImage = false;
             $scope.showLoader = false;
@@ -132,10 +132,10 @@ angular
                 alert("Congratulation! You just finished the last step of this sample app.")
             };
 
-            function getMockData() {
+            function getTshirtsData() {
                 openShowLoader();
                 loadSizesToShow(vm.sizeList);
-                mockApiService.getData().then(function (response) {
+                homeServiceService.getData().then(function (response) {
                     angular.forEach(response.data, function(row) {
                         row["imageUrl"] = "data:image/jpg;base64," + row.image;
                     });
@@ -147,6 +147,6 @@ angular
                 });
             }
 
-            getMockData();
+            getTshirtsData();
         }
     ]);

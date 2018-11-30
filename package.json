@@ -53,6 +53,7 @@
     "angular-route": "1.5.8",
     "angular-sanitize": "1.5.7",
     "bootstrap": "4.1.0",
+    "express": "^4.16.4",
     "extract-loader": "0.1.0",
     "feature-toggle": "0.3.0",
     "git-download": "0.0.2",
