@@ -245,10 +245,6 @@ ul, li {
     z-index: 2;
 }
 
-#alertDiv {
-    padding-top: 1.5em;
-}
-
 .close {
     margin-top: -.15em;
 }

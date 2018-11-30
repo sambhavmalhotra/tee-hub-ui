@@ -4,7 +4,6 @@ angular
         '$scope', '$location', '$timeout', 'mockApiService', '$filter',
         function ($scope, $location, $timeout, mockApiService, $filter) {
             var vm = this;
-            $scope.showMessage = false;
             $scope.openImage = false;
             $scope.showLoader = false;
             $scope.showPosts = true;
@@ -42,14 +41,6 @@ angular
             function closeShowLoader() {
                 $scope.showLoader = false;
             }
-
-            $scope.closeMessageBox = function() {
-                $scope.showMessage = false;
-            };
-
-            $scope.openMessageBox = function() {
-                $scope.showMessage = true;
-            };
 
             $scope.openNav = function() {
                 $scope.isCartOpen = true;

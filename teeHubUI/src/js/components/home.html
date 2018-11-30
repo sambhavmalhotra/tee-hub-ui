@@ -70,14 +70,6 @@
     <div class="containerContentOverlay" ng-click="closeNav()" ng-if="isCartOpen"></div>
     <div class="container-fluid homeBody">
         <div class="rows">
-            <div class="row" ng-if="showMessage">
-                <div ng-class="alertClass" class="col-sm-10 col-lg-10 col-md-10 mx-auto">
-                    <button class="close" ng-click="closeMessageBox()">&times;</button>
-                    <div>
-                        <p ng-repeat="msg in messageBody.data">{{ msg }}</p>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-2 col-lg-2 col-md-2 block-outer">
                     <div class="blocks left-block">
