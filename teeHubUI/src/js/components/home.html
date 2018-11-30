@@ -1,0 +1,142 @@
+<div ng-controller="homeController as vm" class="has-drawer">
+    <nav class="navbar home-navbar bg-faded">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">
+                    <h2>Tee Hub</h2>
+                </a>
+            </div>
+            <button class="btn btn-secondary home-menu-dropdown" type="button" ng-click="openNav()">
+                <span class="p1 fa-stack fa-2x has-badge" data-count="{{vm.cartData.length}}">
+                    <i class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b" style="font-size: 30px;"></i>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mySidenav" class="sidenav container" ng-class="{'sidenav-open': isCartOpen}">
+        <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+        <div class="rows">
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-sm-6 mx-auto cart-open-heading">
+                    Cart
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-10 col-sm-10 mx-auto">
+                <hr style="color: #fff;"/>
+            </div>
+            <div class="row cart-no-content" ng-if="vm.cartData.length === 0">
+                <h6 class="white">Browse to add products to cart</h6>
+            </div>
+            <div class="row cart-content" ng-if="vm.cartData.length > 0">
+                <div class="row cart-item" ng-repeat="item in vm.cartData">
+                    <div class="col-lg-2 col-sm-2 col-md-2 cart-item-image">
+                        <img src="{{item.imageUrl}}" alt="{{item.name}}" width="60" height="70" />
+                    </div>
+                    <div class="col-lg-7 col-sm-7 col-md-7 cart-item-details">
+                        <div>{{item.name}}</div>
+                        <div><span class="app-light-grey">Size: </span>{{item.size}}</div>
+                        <div><span class="app-light-grey">Quantity: </span>1</div>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-md-2 cart-item-details">
+                        <a href="javascript:void(0)" class="cart-item-close display-block" ng-click="vm.removeFromCart(item.id)">&times;</a>
+                        <div class="display-block cart-item-price">&#8377; {{item.price}}</div>
+                    </div>
+                </div>
+                <div class="col-md-11 col-lg-11 col-sm-11 mx-auto">
+                    <hr style="color: #fff; margin-top: 3em !important;"/>
+                </div>
+                <div class="row cart-footer-row">
+                    <div class="col-lg-12 col-sm-12 col-md-12 mx-auto cart-footer">
+                        <div class="col-lg-7 col-sm-7 col-md-7 cart-footer-items app-light-grey">
+                            Subtotal
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 cart-footer-items app-yellow">
+                            &#8377; {{totalPrice}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row cart-checkout">
+                    <div class="col-lg-12 col-sm-12 col-md-12 mx-auto">
+                        <button type="button" class="btn btn-lg btn-block checkout-button" ng-click="checkoutCart()">
+                            CHECKOUT
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="containerContentOverlay" ng-click="closeNav()" ng-if="isCartOpen"></div>
+    <div class="container-fluid homeBody">
+        <div class="rows">
+            <div class="row" ng-if="showMessage">
+                <div ng-class="alertClass" class="col-sm-10 col-lg-10 col-md-10 mx-auto">
+                    <button class="close" ng-click="closeMessageBox()">&times;</button>
+                    <div>
+                        <p ng-repeat="msg in messageBody.data">{{ msg }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-lg-2 col-md-2 block-outer">
+                    <div class="blocks left-block">
+                        <h5>Filters</h5>
+                        <hr/>
+                        <div class="sizes">
+                            <span class="badge size-badge" ng-class="{'size-selected': size.isSelected, '': !size.isSelected}"
+                                  ng-repeat="size in vm.sizeList" id="{{size.name}}"
+                                  ng-click="vm.selectSize(size.name)">
+                                {{size.name}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-lg-10 col-md-10 block-outer">
+                    <div class="blocks right-block">
+                        <div class="inner-right-block">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <h5>T Shirts</h5><h6>(Showing {{vm.tShirtsDataToShow.length}} products(s))</h6>
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <span class="order-by app-light-grey">Order By</span>
+                                <ul>
+                                    <li ng-class="{'li-selected': vm.orderByForData === 'price'}" ng-click="vm.orderByClick('price')">Low to High</li>
+                                    <li ng-class="{'li-selected': vm.orderByForData === '-price'}" ng-click="vm.orderByClick('-price')">High to Low</li>
+                                </ul>
+                            </div>
+                            <hr class="margin-hr"/>
+                            <div class="col-sm-12 col-md-12 col-lg-12 cards-outer-div">
+                                <div ng-if="vm.tShirtsDataToShow.length === 0">
+                                    No products found
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3 cards-inner-div" ng-if="vm.tShirtsDataToShow.length > 0"
+                                     ng-repeat="tshirt in vm.tShirtsDataToShow | orderBy: vm.orderByForData">
+                                    <span class="offer-free-float" ng-if="tshirt.isShippingFree">Free Shipping</span>
+                                    <div class="card mx-auto" style="width: 100%;">
+                                        <img class="card-img-top" src="{{tshirt.imageUrl}}" alt="{{tshirt.name}}" />
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{tshirt.name}}</h5>
+                                            <p class="card-text">{{tshirt.size}} &nbsp; | &nbsp; &#8377; {{tshirt.price}}</p>
+                                            <button href="#" class="btn btn-dark" ng-if="!tshirt.isAddedToCart" ng-click="vm.addToCart(tshirt.id)">
+                                                Add to Cart
+                                            </button>
+                                            <button href="#" class="btn btn-success" ng-if="tshirt.isAddedToCart">
+                                                <i class="fa fa-check" aria-hidden="true"></i> Added to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="containerContentOverlay" ng-if="showLoader"></div>
+        <div class="containerContentOverlayContent" ng-if="showLoader">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
