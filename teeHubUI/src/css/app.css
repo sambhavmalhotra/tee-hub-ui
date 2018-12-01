@@ -147,6 +147,26 @@ ul, li {
     width: 200px;
 }
 
+.card-price {
+    font-weight: 700;
+    font-size: 14px;
+    padding-bottom: .5em;
+}
+
+.card-error {
+    color: red;
+    font-size: 13px;
+    padding: .3em;
+}
+
+.card-text .size-badge {
+    font-weight: 300 !important;
+}
+
+.card-title {
+    font-size: 12px;
+}
+
 .li-selected {
     font-size: 14px !important;
     font-weight: 700;

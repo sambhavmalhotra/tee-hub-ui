@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-lg-7 col-sm-7 col-md-7 cart-item-details">
                         <div>{{item.name}}</div>
-                        <div><span class="app-light-grey">Size: </span>{{item.size}}</div>
+                        <div><span class="app-light-grey">Size: </span>{{item.selectedSize}}</div>
                         <div><span class="app-light-grey">Quantity: </span>1</div>
                     </div>
                     <div class="col-lg-2 col-sm-2 col-md-2 cart-item-details">
@@ -110,7 +110,16 @@
                                         <img class="card-img-top" src="{{tshirt.imageUrl}}" alt="{{tshirt.name}}" />
                                         <div class="card-body">
                                             <h5 class="card-title">{{tshirt.name}}</h5>
-                                            <p class="card-text">{{tshirt.size}} &nbsp; | &nbsp; &#8377; {{tshirt.price}}</p>
+                                            <div class="card-text">
+                                                <div>
+                                                    <span ng-repeat="size in tshirt.sizes" class="badge size-badge" ng-click="selectSizeForItem(tshirt, size)"
+                                                          ng-class="{'size-selected': tshirt.selectedSize === size}">
+                                                        {{size}}
+                                                    </span>
+                                                </div>
+                                                <div class="card-price">&#8377; {{tshirt.price}}</div>
+                                            </div>
+                                            <div ng-if="tshirt.error.length > 0" class="card-error">{{tshirt.error}}</div>
                                             <button href="#" class="btn btn-dark" ng-if="!tshirt.isAddedToCart" ng-click="vm.addToCart(tshirt.id)">
                                                 Add to Cart
                                             </button>

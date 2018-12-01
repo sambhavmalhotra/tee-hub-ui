@@ -94,7 +94,7 @@ angular
                     });
                     vm.tShirtsDataToShow = vm.tShirtsData.filter(function(row) {
                         return sizes.some(function(size) {
-                            return (row.size ===size);
+                            return (row.sizes.indexOf(size) > -1);
                         });
                     });
                     console.log(vm.tShirtsDataToShow);
@@ -107,6 +107,7 @@ angular
                 angular.forEach(vm.tShirtsDataToShow, function(row) {
                     if(row.id === Number(val)) {
                         row.isAddedToCart = false;
+                        row.selectedSize = "";
                         var index = vm.cartData.findIndex(function (data) {
                             return data.id === Number(val);
                         });
@@ -121,9 +122,30 @@ angular
             vm.addToCart = function(val) {
                 angular.forEach(vm.tShirtsDataToShow, function(row) {
                     if(row.id === Number(val)) {
-                        row.isAddedToCart = true;
-                        vm.cartData.push(row);
-                        $scope.totalPrice = Number($scope.totalPrice) + Number(row.price);
+                        if(row.selectedSize.length === 0) {
+                            row.error = "Select size for the product";
+                        } else {
+                            row.error = "";
+                            row.isAddedToCart = true;
+                            vm.cartData.push(row);
+                            $scope.totalPrice = Number($scope.totalPrice) + Number(row.price);
+                        }
+                    }
+                });
+            };
+
+            $scope.selectSizeForItem = function(itemToSelect, sizeToSelect) {
+                if(itemToSelect.isAddedToCart) {
+                    return;
+                }
+                angular.forEach(vm.tShirtsDataToShow, function(row) {
+                    if(row.id === itemToSelect.id) {
+                        row.error = "";
+                        if(row.selectedSize === sizeToSelect) {
+                            row.selectedSize = "";
+                        } else {
+                            row.selectedSize = sizeToSelect;
+                        }
                     }
                 });
             };
@@ -139,6 +161,8 @@ angular
                     angular.forEach(response.data, function(row) {
                         row["imageUrl"] = "data:image/jpg;base64," + row.image;
                         row["isAddedToCart"] = false;
+                        row["selectedSize"] = "";
+                        row["error"] = "";
                     });
                     vm.tShirtsData = angular.copy(response.data);
                     filterDataToShow(vm.sizeList);
